@@ -1,14 +1,6 @@
-import { useState } from "react";
-import "./App.css";
-import ProductList from "./redux/component/productList";
+import AppRoute from "./router/router";
 function App() {
-  const [count, setCount] = useState(0);
-
-  return (
-    <>
-      <ProductList />
-    </>
-  );
+  return <AppRoute />;
 }
 
 export default App;
