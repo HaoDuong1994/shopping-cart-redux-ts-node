@@ -3,7 +3,11 @@ import { RootState } from "../store/store";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../store/store";
-import { deleteItem } from "../slices/cartSlice";
+import {
+  deleteItem,
+  increaseQuantity,
+  decreaseQuantity,
+} from "../slices/cartSlice";
 function CartList() {
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
@@ -21,7 +25,7 @@ function CartList() {
         Home
       </button>
       <div className="p-4">
-        <h2 className="text-xl font-bold mb-4">Giỏ Hàng</h2>
+        <h2 className="text-xl font-bold mb-4">Cart Item</h2>
         {cartItem.length === 0 ? (
           <p>Cart Empty</p>
         ) : (
@@ -40,7 +44,22 @@ function CartList() {
                 <p className="font-bold text-red-500">
                   {item.buyPrice.toLocaleString()} VNĐ
                 </p>
-                <p>Số lượng: {item.quantity}</p>
+                <p>
+                  Quantity:
+                  <span
+                    onClick={() => {
+                      dispatch(increaseQuantity(item._id));
+                    }}>
+                    +
+                  </span>
+                  <span>{item.quantity}</span>
+                  <span
+                    onClick={() => {
+                      dispatch(decreaseQuantity(item._id));
+                    }}>
+                    -
+                  </span>
+                </p>
               </div>
               <button
                 onClick={() => {

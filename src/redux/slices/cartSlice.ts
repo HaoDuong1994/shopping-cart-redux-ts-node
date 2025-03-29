@@ -32,7 +32,24 @@ const cartSlice = createSlice({
         return item._id != action.payload;
       });
     },
+    increaseQuantity: (state, action: PayloadAction<string | number>) => {
+      let currentItem = state.cartItem.find((item) => {
+        return item._id === action.payload;
+      });
+      if (currentItem) {
+        currentItem.quantity += 1;
+      }
+    },
+    decreaseQuantity: (state, action: PayloadAction<string | number>) => {
+      let currentItem = state.cartItem.find((item) => {
+        return item._id === action.payload;
+      });
+      if (currentItem && currentItem.quantity > 1) {
+        currentItem.quantity -= 1;
+      }
+    },
   },
 });
-export const { addCart, deleteItem } = cartSlice.actions;
+export const { addCart, deleteItem, increaseQuantity, decreaseQuantity } =
+  cartSlice.actions;
 export default cartSlice.reducer;
