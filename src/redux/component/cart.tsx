@@ -3,6 +3,7 @@ import { RootState } from "../store/store";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../store/store";
+import { HomeIcon } from "@heroicons/react/24/solid";
 import {
   deleteItem,
   increaseQuantity,
@@ -17,22 +18,25 @@ function CartList() {
   };
   return (
     <div className="text-red-600">
-      <button
-        className="bg-blue-500 text-white px-4 py-2 rounded-lg shadow-md hover:bg-blue-700 transition duration-300 ease-in-out"
-        onClick={() => {
-          navigate("/");
-        }}>
-        Home
-      </button>
       <div className="p-4">
-        <h2 className="text-xl font-bold mb-4">Cart Item</h2>
+        <div className="flex">
+          <h2 className="text-xl font-semibold">Cart Item</h2>
+          <span>
+            <HomeIcon
+              onClick={() => {
+                navigate("/");
+              }}
+              className="ml-4 w-6 h-6 text-black hover:cursor-pointer"
+            />
+          </span>
+        </div>
         {cartItem.length === 0 ? (
-          <p>Cart Empty</p>
+          <p>Cart Empty...</p>
         ) : (
           cartItem.map((item) => (
             <div
               key={item._id}
-              className="border p-4 rounded-lg shadow-md flex mb-4">
+              className="mt-4 border p-4 rounded-lg shadow-md flex mb-4">
               <img
                 src={item.img}
                 alt={item.productName}
@@ -44,16 +48,17 @@ function CartList() {
                 <p className="font-bold text-red-500">
                   {item.buyPrice.toLocaleString()} VNĐ
                 </p>
-                <p>
-                  Quantity:
+                <p className="w-25 flex justify-center items-center text-center border-solid border-gray-300 rounded-lg overflow-hidden text-gray-500 border border-solid">
                   <span
+                    className="[flex-basis:20%] flex items-center justify-center bg-gray-200 border-r border-gray-300 hover:cursor-pointer"
                     onClick={() => {
                       dispatch(increaseQuantity(item._id));
                     }}>
                     +
                   </span>
-                  <span>{item.quantity}</span>
+                  <span className="flex-grow">{item.quantity}</span>
                   <span
+                    className="[flex-basis:20%] flex items-center justify-center bg-gray-200 border-l border-gray-300 hover:cursor-pointer"
                     onClick={() => {
                       dispatch(decreaseQuantity(item._id));
                     }}>
