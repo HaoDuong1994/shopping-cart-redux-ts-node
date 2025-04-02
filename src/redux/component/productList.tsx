@@ -58,7 +58,7 @@ function ProductList() {
             <p className="text-red-500 font-semibold">${product.buyPrice}</p>
             <p className="text-sm text-gray-500">{product.productType}</p>
             <button
-              className="mt-2 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700 transition"
+              className="mt-2 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700 transition cursor-pointer"
               onClick={() => handleAddCart(product)}>
               Add to Cart
             </button>
